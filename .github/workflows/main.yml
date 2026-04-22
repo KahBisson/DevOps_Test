@@ -17,8 +17,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Instalar Jest
-        run: npm install jest --save-dev
-
-      - name: Executar Testes Unitários
-        run: ./node_modules/.bin/jest projeto.test.js
+      - name: Instalar Jest e Rodar Testes
+        run: |
+          npm install jest
+          npx jest projeto.test.js
