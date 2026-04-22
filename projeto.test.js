@@ -1,4 +1,4 @@
-const { validarTitulo, calcularDesconto } = require("./funcoes");
+const { validarTitulo, calcularDesconto, verificarEstoque } = require("./funcoes");
 
 test('Validação de título', () => {
   expect(validarTitulo("Teste de Testes Unitários")). toBe(true);
