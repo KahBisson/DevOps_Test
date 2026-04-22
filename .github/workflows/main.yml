@@ -2,17 +2,23 @@ name: CI-Check
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "branch_test" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "branch_test" ]
 
 jobs:
   verificacao:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verificar HTML
+      - name: Verificar se o arquivo existe
         run: |
-          echo "Validando estrutura..."
-          grep -q "<html>" index.html
-          echo "Tudo certo!"
+          if [ -f index.html ]; then
+            echo "Arquivo index.html encontrado!"
+          else
+            echo "Erro: index.html não encontrado na raiz."
+            exit 1
+          fi
+      - name: Validar HTML
+        # O -i faz ignorar maiúsculas/minúsculas
+        run: grep -i "<html" index.html
