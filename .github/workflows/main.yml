@@ -7,11 +7,21 @@ on:
     branches: [ "master", "branch_test" ]
 
 jobs:
-  testes:
+  verificacao:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       
+      - name: Verificar HTML
+        run: |
+          if [ -f index.html ]; then
+            echo "Arquivo index.html encontrado!"
+            grep -i "<html" index.html
+          else
+            echo "Erro: index.html não encontrado."
+            exit 1
+          fi
+
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
